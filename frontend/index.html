@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolv Domain Reaper Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="/static/logo.png" alt="Evolv Logo" class="logo-img">
+                <span>Evolv Reaper_ </span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active" data-section="dashboard">
+                        <i class="icon">📊</i> <span>Panel</span>
+                    </li>
+                    <li data-section="scrape">
+                        <i class="icon">🔍</i> <span>Scrape</span>
+                    </li>
+                    <li data-section="export">
+                        <i class="icon">📥</i> <span>Export</span>
+                    </li>
+                </ul>
+            </nav>
+            <div class="theme-toggle">
+                <button id="toggle-theme">🌓 Toggle Theme</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <!-- Dashboard -->
+            <section id="dashboard" class="section active">
+                <h1>Dashboard</h1>
+                <div class="cards">
+                    <div class="card">
+                        <h3>Total Domains</h3>
+                        <p id="total-domains">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Industries</h3>
+                        <p id="industry-count">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Countries</h3>
+                        <p id="country-count">0</p>
+                    </div>
+                    <div class="card actions-card">
+                        <h3>Actions</h3>
+                        <div class="card-actions">
+                            <button id="refresh-data" class="btn btn-refresh" title="Refresh Data">
+                                <i class="icon">🔄</i> Refresh
+                            </button>
+                            <button id="delete-data" class="btn btn-delete" title="Delete All Data">
+                                <i class="icon">🗑️</i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrape Section -->
+            <section id="scrape" class="section">
+                <h1>Scrape Domains</h1>
+                <div class="form-group">
+                    <label>Select Country</label>
+                    <div class="custom-select-wrapper">
+                        <div class="custom-select" id="country-select" data-value="all">
+                            <span>All Countries</span>
+                            <i class="icon">▼</i>
+                        </div>
+                        <div class="custom-select-options" id="country-options">
+                            <div class="custom-option" data-value="all">All Countries</div>
+                            <div class="custom-option" data-value="EU">Europe</div>
+                            <div class="custom-option" data-value="HighGDP">High GDP</div>
+                            <div class="custom-option" data-value="Global">Global</div>
+                            <div class="custom-option" data-value="custom">Custom Country</div>
+                        </div>
+                    </div>
+                    <input type="text" id="custom-country" placeholder="e.g. United States, Germany" class="custom-text-input" style="display:none; margin-top: 1rem;">
+                </div>
+
+                <div class="form-group">
+                    <label>Select Industry</label>
+                    <div class="custom-select-wrapper">
+                        <div class="custom-select" id="industry-select" data-value="finance">
+                            <span>Finance</span>
+                            <i class="icon">▼</i>
+                        </div>
+                        <div class="custom-select-options" id="industry-options">
+                            <div class="custom-option" data-value="finance">Finance</div>
+                            <div class="custom-option" data-value="tech">Tech</div>
+                            <div class="custom-option" data-value="health">Health</div>
+                            <div class="custom-option" data-value="legal">Legal</div>
+                            <div class="custom-option" data-value="custom">Custom Keywords</div>
+                        </div>
+                    </div>
+                    <input type="text" id="custom-keywords" placeholder="e.g. fintech, insurance" class="custom-text-input" style="display:none; margin-top: 1rem;">
+                </div>
+
+                <button id="start-scrape" class="btn">Start Scrape</button>
+                <div class="progress">
+                    <div id="progress-bar"></div>
+                </div>
+                <p id="scrape-status"></p>
+            </section>
+
+            <!-- Export Section -->
+            <section id="export" class="section">
+                <h1>Export Domains</h1>
+                <div class="export-buttons">
+                    <button onclick="exportFile('txt')">
+                        <span>TXT</span>
+                        <div class="download-icon">↓</div>
+                    </button>
+                    <button onclick="exportFile('md')">
+                        <span>Markdown</span>
+                        <div class="download-icon">↓</div>
+                    </button>
+                    <button onclick="exportFile('csv')">
+                        <span>CSV</span>
+                        <div class="download-icon">↓</div>
+                    </button>
+                    <button onclick="exportFile('json')">
+                        <span>JSON</span>
+                        <div class="download-icon">↓</div>
+                    </button>
+                </div>
+                <p id="export-status"></p>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 <a href="https://t.me/evolv" target="_blank">Evolv Systems</a></p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+
+    <!-- Custom UI Components -->
+    <div id="toast" class="toast-notification"></div>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-content">
+                <h3>Confirm Action</h3>
+                <p id="modal-message"></p>
+                <div class="modal-actions">
+                    <button id="modal-cancel" class="modal-btn">Cancel</button>
+                    <button id="modal-confirm" class="modal-btn modal-btn-danger">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Theme Toggle -->
+    <button id="mobile-toggle-theme" class="mobile-theme-btn" title="Toggle Theme">
+        🌓
+    </button>
+</body>
+</html>
