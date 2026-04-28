@@ -112,7 +112,26 @@
 
 ---
 
-## 🔄 Pipeline
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Monero-Donate-orange?style=for-the-badge&logo=monero">
+  <img src="https://img.shields.io/badge/Bitcoin-Donate-yellow?style=for-the-badge&logo=bitcoin">
+</p>
+
+> ⚡ Please support my project. Monero & Bitcoin contributions are appreciated.
+
+---
+
+## 💰 Sponsorship Wallets
+
+### 🪙 Monero (XMR) 
 ```text
-Collection → Classification → Validation → Storage → Export
+484BLcjgtxUE7AY5D4fXt7YnbrdydA19878FsaE9epprcdcBLMpp9KtfSqb3m54ZBnDDLc5AQosRvg77XfbRLHdUGC9QqKz 
+
+```
+
+### 🪙 Bitcoin (BTC) 
+```text
+bc1q9pud7atnxy6sx9lkse2q5akrrl0ykqevdptu4s
+
+```
